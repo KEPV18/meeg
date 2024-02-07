@@ -1,17 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> kepv for meeg</title>
+  <title>KEPV for meeg</title>
   <style>
     /* General Design Styles */
-
     body {
       font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
-      color: #333;
+      background-color: rgb(0, 0, 0); /* خلفية سوداء */
+      color: #fff; /* لون نص أبيض */
       margin: 20px;
+    }
+
+    header {
+      background-color: #15a33f; /* اللون الموف */
+      padding: 10px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    header p {
+      margin: 5px 0 0;
+      color: #fff;
     }
 
     .container {
@@ -22,20 +37,20 @@
     }
 
     /* Input and Button Styles */
-
     label {
       display: block;
       margin-top: 10px;
     }
 
-    input {
+    input,
+    button {
       width: calc(100% - 18px);
       padding: 8px;
       margin-top: 5px;
+      box-sizing: border-box;
     }
 
     button {
-      width: calc(100% - 18px);
       padding: 10px;
       background-color: #4caf50;
       color: white;
@@ -49,7 +64,6 @@
     }
 
     /* Loader Styles */
-
     .loader {
       display: block;
       margin: 20px auto;
@@ -62,15 +76,19 @@
     }
 
     @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
 
     /* Grid Styles */
-
     .table-container {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
       gap: 20px;
       margin-top: 20px;
     }
@@ -80,7 +98,8 @@
       border-collapse: collapse;
     }
 
-    .table-container th, .table-container td {
+    .table-container th,
+    .table-container td {
       border: 1px solid #ddd;
       padding: 8px;
       text-align: left;
@@ -92,151 +111,158 @@
     }
 
     .table-container td {
-      background-color: #f9f9f9;
+      background-color: #000000;
     }
   </style>
 </head>
+
 <body>
 
-<div class="container">
-  <!-- Input and Button -->
-  <label for="userNumber">Enter Number:</label>
-  <input type="text" id="userNumber" />
-  <button onclick="searchNumber()">Search</button>
+  <header>
+    <h1>KEPV for Meeg</h1>
+    <p> By  [A.K]</p>
+  </header>
 
-  <!-- Tables Container -->
-  <div class="table-container" id="tablesContainer">
-    <!-- Table 1 -->
-    <table id="resultTable1">
-      <thead>
-        <tr>
-          <th>DATE</th>
-          <th>Hours</th>
-          <th>Value</th>
-        </tr>
-      </thead>
-      <tbody id="tableBody1"></tbody>
-    </table>
+  <div class="container">
+    <!-- Input and Button -->
+    <label for="userNumber">Enter Your ME Number :</label>
+    <input type="text" id="userNumber" />
+    <button onclick="searchNumber()">Search</button>
 
-    <!-- Table 2 -->
-    <table id="resultTable2">
-      <thead>
-        <tr>
-          <th>DATE</th>
-          <th>Spl</th>
-          <th>Value</th>
-        </tr>
-      </thead>
-      <tbody id="tableBody2"></tbody>
-    </table>
+    <!-- Tables Container -->
+    <div class="table-container" id="tablesContainer">
+      <!-- Table 1 -->
+      <table id="resultTable1">
+        <thead>
+          <tr>
+            <th>DATE</th>
+            <th>Hours</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody1"></tbody>
+      </table>
+
+      <!-- Table 2 -->
+      <table id="resultTable2">
+        <thead>
+          <tr>
+            <th>DATE</th>
+            <th>Spl</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody2"></tbody>
+      </table>
+    </div>
   </div>
-</div>
 
-<script>
-  const tableBody1 = document.getElementById("tableBody1");
-  const tableBody2 = document.getElementById("tableBody2");
+  <script>
+    const tableBody1 = document.getElementById("tableBody1");
+    const tableBody2 = document.getElementById("tableBody2");
 
-  async function searchNumber() {
-    const userNumber = document.getElementById("userNumber").value;
-    const id = `ME${userNumber}@meti.ai`;
+    async function searchNumber() {
+      const userNumber = document.getElementById("userNumber").value;
+      const id = `ME${userNumber}@meti.ai`;
 
-    tableBody1.innerHTML = ''; // Clear Table 1
-    tableBody2.innerHTML = ''; // Clear Table 2
+      tableBody1.innerHTML = ''; // Clear Table 1
+      tableBody2.innerHTML = ''; // Clear Table 2
 
-    const sheetsNames1 = await getSheets('1');
-    const sheetsNames2 = await getSheets('2');
+      const sheetsNames1 = await getSheets('1');
+      const sheetsNames2 = await getSheets('2');
 
-    await Promise.all(sheetsNames1.map(async (curSheet) => {
+      await Promise.all(sheetsNames1.map(async (curSheet) => {
+        const res = await fetch(
+          `https://sheets.googleapis.com/v4/spreadsheets/15TI7wC8qRSCK2hk32bWTOggEa54p3RYE_9aPQXTilAc/values/${curSheet}?key=AIzaSyA1DiDSTDT-E1KtlFhUpeecLxnKh_Uxxf8`
+        );
+        const data = await res.json();
+        displayTableData(data, tableBody1, curSheet, id);
+      }));
+
+      await Promise.all(sheetsNames2.map(async (curSheet) => {
+        const res = await fetch(
+          `https://sheets.googleapis.com/v4/spreadsheets/1I3HSt1_WYaVlChTK37VJyYSW07xIA09sq-4lsZyN4og/values/${curSheet}?key=AIzaSyA1DiDSTDT-E1KtlFhUpeecLxnKh_Uxxf8`
+        );
+        const data = await res.json();
+        displayTableData(data, tableBody2, curSheet, id);
+      }));
+    }
+
+    async function getSheets(page) {
       const res = await fetch(
-        `https://sheets.googleapis.com/v4/spreadsheets/15TI7wC8qRSCK2hk32bWTOggEa54p3RYE_9aPQXTilAc/values/${curSheet}?key=AIzaSyA1DiDSTDT-E1KtlFhUpeecLxnKh_Uxxf8`
+        `https://sheets.googleapis.com/v4/spreadsheets/${getSpreadsheetKey(page)}/?key=AIzaSyA1DiDSTDT-E1KtlFhUpeecLxnKh_Uxxf8`
       );
       const data = await res.json();
-      displayTableData(data, tableBody1, curSheet, id);
-    }));
+      const sheetsNames = data.sheets.map((sheet) => ({
+        title: encodeURIComponent(sheet.properties.title),
+        index: parseInt(sheet.properties.title.split("/").pop()) || 0
+      }));
 
-    await Promise.all(sheetsNames2.map(async (curSheet) => {
-      const res = await fetch(
-        `https://sheets.googleapis.com/v4/spreadsheets/1I3HSt1_WYaVlChTK37VJyYSW07xIA09sq-4lsZyN4og/values/${curSheet}?key=AIzaSyA1DiDSTDT-E1KtlFhUpeecLxnKh_Uxxf8`
-      );
-      const data = await res.json();
-      displayTableData(data, tableBody2, curSheet, id);
-    }));
-  }
-
-  async function getSheets(page) {
-    const res = await fetch(
-      `https://sheets.googleapis.com/v4/spreadsheets/${getSpreadsheetKey(page)}/?key=AIzaSyA1DiDSTDT-E1KtlFhUpeecLxnKh_Uxxf8`
-    );
-    const data = await res.json();
-    const sheetsNames = data.sheets.map((sheet) => ({
-      title: encodeURIComponent(sheet.properties.title),
-      index: parseInt(sheet.properties.title.split("/").pop()) || 0
-    }));
-
-    sheetsNames.sort((a, b) => {
-      const dateA = extractDateFromSheetName(a.title);
-      const dateB = extractDateFromSheetName(b.title);
-      return dateA - dateB;
-    });
-
-    return sheetsNames.map(sheet => sheet.title);
-  }
-
-  function extractDateFromSheetName(sheetName) {
-    const match = sheetName.match(/(\d{1,2})\/(\d{1,2})/);
-    if (match) {
-      const month = parseInt(match[1]);
-      const day = parseInt(match[2]);
-      return new Date(new Date().getFullYear(), month - 1, day);
-    }
-    return null;
-  }
-
-  function getSpreadsheetKey(page) {
-    return (page === '1') ? '15TI7wC8qRSCK2hk32bWTOggEa54p3RYE_9aPQXTilAc' : '1I3HSt1_WYaVlChTK37VJyYSW07xIA09sq-4lsZyN4og';
-  }
-
-  function getSheetNumber(sheetName) {
-    const match = sheetName.match(/(\d{1,2})\/(\d{1,2})/);
-    if (match) {
-      return match[2] + '/' + match[1];
-    }
-    return null;
-  }
-
-  function displayTableData(data, tableBody, curSheet, id) {
-    const myIdRow = data.values.find((row) => row.includes(id));
-
-    if (myIdRow) {
-      const sheetName = curSheet.replace(/%2(\d|[A-Z])/g, "/");
-      const sheetNameParts = sheetName.match(/(\d{1,2}\/\d{1,2})$/);
-      const simplifiedSheetName = sheetNameParts ? sheetNameParts[1] : sheetName;
-
-      myIdRow.slice(7).forEach((item, i) => {
-        if (item !== undefined && item !== null && item !== "" && item !== "undefined(FP)" && item !== "0") {
-          const row = document.createElement("tr");
-
-          const sheetNameCell = document.createElement("td");
-          sheetNameCell.textContent = simplifiedSheetName;
-          row.appendChild(sheetNameCell);
-
-          const nameCell = document.createElement("td");
-          nameCell.textContent = (data.values[0][i + 7] !== "" && data.values[0][i + 7] + "(FP)") ||
-            (data.values[0][i + 6] !== "" && "NO. labels FP") ||
-            (data.values[0][i + 5] !== "" && data.values[0][i + 5] + "(QA)") ||
-            (data.values[0][i + 4] !== "" && "NO. labels QA");
-          row.appendChild(nameCell);
-
-          const valueCell = document.createElement("td");
-          valueCell.textContent = item;
-          row.appendChild(valueCell);
-
-          tableBody.appendChild(row);
-        }
+      sheetsNames.sort((a, b) => {
+        const dateA = extractDateFromSheetName(a.title);
+        const dateB = extractDateFromSheetName(b.title);
+        return dateA - dateB;
       });
+
+      return sheetsNames.map(sheet => sheet.title);
     }
-  }
-</script>
+
+    function extractDateFromSheetName(sheetName) {
+      const match = sheetName.match(/(\d{1,2})\/(\d{1,2})/);
+      if (match) {
+        const month = parseInt(match[1]);
+        const day = parseInt(match[2]);
+        return new Date(new Date().getFullYear(), month - 1, day);
+      }
+      return null;
+    }
+
+    function getSpreadsheetKey(page) {
+      return (page === '1') ? '15TI7wC8qRSCK2hk32bWTOggEa54p3RYE_9aPQXTilAc' : '1I3HSt1_WYaVlChTK37VJyYSW07xIA09sq-4lsZyN4og';
+    }
+
+    function getSheetNumber(sheetName) {
+      const match = sheetName.match(/(\d{1,2})\/(\d{1,2})/);
+      if (match) {
+        return match[2] + '/' + match[1];
+      }
+      return null;
+    }
+
+    function displayTableData(data, tableBody, curSheet, id) {
+      const myIdRow = data.values.find((row) => row.includes(id));
+
+      if (myIdRow) {
+        const sheetName = curSheet.replace(/%2(\d|[A-Z])/g, "/");
+        const sheetNameParts = sheetName.match(/(\d{1,2}\/\d{1,2})$/);
+        const simplifiedSheetName = sheetNameParts ? sheetNameParts[1] : sheetName;
+
+        myIdRow.slice(7).forEach((item, i) => {
+          if (item !== undefined && item !== null && item !== "" && item !== "undefined(FP)" && item !== "0") {
+            const row = document.createElement("tr");
+
+            const sheetNameCell = document.createElement("td");
+            sheetNameCell.textContent = simplifiedSheetName;
+            row.appendChild(sheetNameCell);
+
+            const nameCell = document.createElement("td");
+            nameCell.textContent = (data.values[0][i + 7] !== "" && data.values[0][i + 7] + "(FP)") ||
+              (data.values[0][i + 6] !== "" && "NO. labels FP") ||
+              (data.values[0][i + 5] !== "" && data.values[0][i + 5] + "(QA)") ||
+              (data.values[0][i + 4] !== "" && "NO. labels QA");
+            row.appendChild(nameCell);
+
+            const valueCell = document.createElement("td");
+            valueCell.textContent = item;
+            row.appendChild(valueCell);
+
+            tableBody.appendChild(row);
+          }
+        });
+      }
+    }
+  </script>
 
 </body>
+
 </html>
