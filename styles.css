@@ -47,7 +47,7 @@
   
   input,
   button {
-    width: calc(30% - 200px);
+    width: calc(100% - 200px);
     padding: 8px;
     margin-top: 5px;
     box-sizing: border-box;
