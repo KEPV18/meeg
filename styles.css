@@ -1,7 +1,7 @@
 /* Media Query for Desktop */
 @media (min-width: 768px) {
     .table-container table {
-      width: 48%; /* تحديد العرض المناسب حسب احتياجات التصميم */
+      width: 48%;
     }
   }
   
@@ -47,7 +47,7 @@
   
   input,
   button {
-    width: calc(100% - 18px);
+    width: calc(30% - 200px);
     padding: 8px;
     margin-top: 5px;
     box-sizing: border-box;
