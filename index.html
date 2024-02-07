@@ -4,53 +4,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KEPV for Meeg</title>
-  <link rel="icon" href="logo.png" type="image/png">
-  <link rel="stylesheet" href="styles.css">
+  <title>Secure Page</title>
 </head>
 
 <body>
 
-  <header>
-    <h1>KEPV for Meeg</h1>
-    <p> By [A.K]</p>
-  </header>
+  <script>
+    const correctPassword = "6969";
 
-  <div class="container">
-    <!-- Input and Button -->
-    <label for="userNumber">Enter Your ME Number :</label>
-    <input type="text" id="userNumber" />
-    <button onclick="searchNumber()">Search</button>
+    const enteredPassword = prompt("Enter the password:");
 
-    <!-- Tables Container -->
-    <div class="table-container" id="tablesContainer">
-      <!-- Table 1 -->
-      <table id="resultTable1">
-        <thead>
-          <tr>
-            <th>DATE</th>
-            <th>Hours</th>
-            <th>Value</th>
-          </tr>
-        </thead>
-        <tbody id="tableBody1"></tbody>
-      </table>
-
-      <!-- Table 2 -->
-      <table id="resultTable2">
-        <thead>
-          <tr>
-            <th>DATE</th>
-            <th>Spl</th>
-            <th>Value</th>
-          </tr>
-        </thead>
-        <tbody id="tableBody2"></tbody>
-      </table>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
+    if (enteredPassword === correctPassword) {
+      // If the password is correct, load the original HTML page
+      window.location.href = "original_page.html";
+    } else {
+      // If the password is incorrect, display an error message
+      alert("Incorrect password. Access denied.");
+    }
+  </script>
 
 </body>
 
