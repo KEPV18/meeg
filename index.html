@@ -21,35 +21,6 @@
       text-align: center;
     }
 
-    /* Table Styles */
-
-    .table-container {
-      width: 100%;
-      overflow-x: auto; /* تفادي مشكلة التمرير الأفقي على الهواتف المحمولة */
-      margin-top: 20px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-
-    th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: left;
-    }
-
-    th {
-      background-color: #4caf50;
-      color: white;
-    }
-
-    td {
-      background-color: #f9f9f9;
-    }
-
     /* Input and Button Styles */
 
     label {
@@ -58,18 +29,19 @@
     }
 
     input {
-      width: 100%;
+      width: calc(100% - 18px);
       padding: 8px;
       margin-top: 5px;
     }
 
     button {
-      width: 100%;
+      width: calc(100% - 18px);
       padding: 10px;
       background-color: #4caf50;
       color: white;
       border: none;
       cursor: pointer;
+      margin-top: 10px;
     }
 
     button:hover {
@@ -93,6 +65,35 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+
+    /* Grid Styles */
+
+    .table-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .table-container table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .table-container th, .table-container td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    .table-container th {
+      background-color: #4caf50;
+      color: white;
+    }
+
+    .table-container td {
+      background-color: #f9f9f9;
+    }
   </style>
 </head>
 <body>
@@ -103,27 +104,26 @@
   <input type="text" id="userNumber" />
   <button onclick="searchNumber()">Search</button>
 
-  <!-- Table 1 -->
-  <div class="table-container" id="hoursBody">
+  <!-- Tables Container -->
+  <div class="table-container" id="tablesContainer">
+    <!-- Table 1 -->
     <table id="resultTable1">
       <thead>
         <tr>
-          <th>Sheet Name</th>
+          <th>DATE</th>
           <th>Hours</th>
           <th>Value</th>
         </tr>
       </thead>
       <tbody id="tableBody1"></tbody>
     </table>
-  </div>
 
-  <!-- Table 2 -->
-  <div class="table-container" id="splBody">
+    <!-- Table 2 -->
     <table id="resultTable2">
       <thead>
         <tr>
-          <th>Sheet Name</th>
-          <th>spl</th>
+          <th>DATE</th>
+          <th>Spl</th>
           <th>Value</th>
         </tr>
       </thead>
@@ -156,9 +156,7 @@
 
     await Promise.all(sheetsNames2.map(async (curSheet) => {
       const res = await fetch(
-        `https://sheets.googleapis.com/v4/spreadsheets/1I3HSt1_WYaVlChTK37VJyYSW07xIA09sq-4lsZyN4og/values/${curSheet}?key=AIzaSyA1DiDSTDT-E1
-
-KtlFhUpeecLxnKh_Uxxf8`
+        `https://sheets.googleapis.com/v4/spreadsheets/1I3HSt1_WYaVlChTK37VJyYSW07xIA09sq-4lsZyN4og/values/${curSheet}?key=AIzaSyA1DiDSTDT-E1KtlFhUpeecLxnKh_Uxxf8`
       );
       const data = await res.json();
       displayTableData(data, tableBody2, curSheet, id);
