@@ -14,10 +14,23 @@
   </header>
   
   <div class="container">
-    <!-- Input and Button -->
-    <label for="userNumber">Enter Your ME Number :</label>
-    <input type="text" id="userNumber" />
-    <button onclick="searchNumber()">Search</button>
+    <label for="searchInput">Enter Number For Delay:</label>
+    <input type="text" id="searchInput" />
+    <button onclick="search()">Search</button>
+
+    <!-- Sheet Dropdown -->
+    <label for="sheetDropdown">Select Sheet:</label>
+    <select id="sheetDropdown"></select>
+
+    <!-- Result Container -->
+    <div id="resultContainer"></div>
+
+    <!-- User Number Section -->
+    <div class="user-number-section">
+      <label for="userNumber">Enter Your ME Number :</label>
+      <input type="text" id="userNumber" />
+      <button onclick="searchNumber()">Search</button>
+    </div>
 
     <!-- Tables Container -->
     <div class="table-container" id="tablesContainer">
@@ -46,6 +59,7 @@
       </table>
     </div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>

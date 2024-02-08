@@ -1,3 +1,82 @@
+// مفتاح ال API الخاص بك
+const apiKey = "AIzaSyA1DiDSTDT-E1KtlFhUpeecLxnKh_Uxxf8";
+// رقم الشيت
+const sheetId = "1uIq-o9hWSlolTnYop9nMNtKRCduGcJ8AjawnQ4JgrRQ";
+
+function search() {
+  const searchValue = document.getElementById("searchInput").value;
+  const selectedSheet = document.getElementById("sheetDropdown").value;
+
+  // إضافة "ME" إلى القيمة المدخلة
+  const formattedSearchValue = `ME${searchValue}`;
+
+  // استدعاء الوظيفة للبحث وعرض النتائج
+  searchSheet(formattedSearchValue, selectedSheet);
+}
+
+async function populateSheetDropdown() {
+  const dropdown = document.getElementById("sheetDropdown");
+  
+  try {
+    const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}?key=${apiKey}`);
+    const data = await response.json();
+
+    // تعبئة القائمة المنسدلة بأسماء الأوراق
+    data.sheets.forEach(sheet => {
+      const option = document.createElement("option");
+      option.value = sheet.properties.title;
+      option.textContent = sheet.properties.title;
+      dropdown.appendChild(option);
+    });
+  } catch (error) {
+    console.error("Error fetching sheet data:", error);
+  }
+}
+
+async function searchSheet(searchValue, selectedSheet) {
+  const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${selectedSheet}?key=${apiKey}`;
+  
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    const resultContainer = document.getElementById("resultContainer");
+    resultContainer.innerHTML = ''; // مسح النتائج السابقة
+
+    // بحث في البيانات
+    const results = data.values.filter(row => row.includes(searchValue));
+
+    if (results.length > 0) {
+      let sum = 0;
+
+      results.forEach(result => {
+        result.forEach(value => {
+          const num = parseFloat(value);
+
+          if (!isNaN(num) && num <= 8) {
+            // إذا كانت القيمة هي رقم وأقل من أو تساوي 8
+            sum += num;
+          }
+        });
+      });
+
+      // عرض المجموع
+      resultContainer.innerHTML = `<p>Total Delay: ${sum}</p>`;
+    } else {
+      resultContainer.innerHTML = '<p>No results found.</p>';
+    }
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+}
+
+// تعبئة القائمة المنسدلة عند تحميل الصفحة
+window.onload = function() {
+  populateSheetDropdown();
+}
+
+
+
 const tableBody1 = document.getElementById("tableBody1");
 const tableBody2 = document.getElementById("tableBody2");
 
