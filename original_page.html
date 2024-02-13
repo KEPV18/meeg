@@ -3,16 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KEPV for Meeg</title>
+  <title>KEPV for Meeg v 2 </title>
   <link rel="icon" href="logo.png" type="image/png">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header>
-    <h1>KEPV for Meeg</h1>
+    <h1>KEPV for Meeg V 2 </h1>
     <p> By [A.K]</p>
+    <BR>
+    <a href="New Spl calculator.html">New Spl calculator</a>
   </header>
-  
+  <div id="totalHours"></div>
   <div class="container">
     <label for="searchInput">Enter Number For Delay:</label>
     <input type="text" id="searchInput" />
@@ -61,5 +63,34 @@
   </div>
 
   <script src="script.js"></script>
+  <script>
+    function calculateTotalHours() {
+      var totalHours = 0;
+  
+      var tableBody1 = document.getElementById("tableBody1");
+      var rows = tableBody1.getElementsByTagName("tr");
+  
+      for (var i = 0; i < rows.length; i++) {
+        var hoursCell = rows[i].getElementsByTagName("td")[1];
+  
+        if (hoursCell) {
+          var hoursValue = parseFloat(hoursCell.innerText) || 0;
+          totalHours += hoursValue;
+        }
+      }
+  
+      displayTotalHours(totalHours);
+  
+      return totalHours;
+    }
+  
+    function displayTotalHours(total) {
+      var totalHoursElement = document.getElementById("totalHours");
+      if (totalHoursElement) {
+        totalHoursElement.innerHTML = "Total Hours: " + total;
+      }
+    }
+  </script>
+  
 </body>
 </html>

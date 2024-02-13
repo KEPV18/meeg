@@ -14,13 +14,13 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: rgb(0, 0, 0);
+  background-color:#2d8659;
   color: #fff;
   margin: 20px;
 }
 
 header {
-  background-color: #cc1717;
+  background-color:#2d8659;
   padding: 20px;
   text-align: center;
 }
@@ -55,7 +55,7 @@ button {
 
 button {
   padding: 12px;
-  background-color: #58084e;
+  background-color:#194d33;
   color: white;
   border: none;
   cursor: pointer;
@@ -63,7 +63,7 @@ button {
 }
 
 button:hover {
-  background-color: #1e46f8;
+  background-color:#c6ecd9;
 }
 
 .loader {
@@ -110,12 +110,12 @@ button:hover {
 }
 
 .table-container th {
-  background-color: #bd1111;
+  background-color:#194d33;
   color: white;
 }
 
 .table-container td {
-  background-color: #000000;
+  background-color:#2d8659;
 }
 
 /* Media Query for Mobile */

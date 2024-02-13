@@ -180,3 +180,33 @@ function displayTableData(data, tableBody, curSheet, id) {
     });
   }
 }
+function calculateTotalHours() {
+  var totalHours = 0;
+
+  var tableBody1 = document.getElementById("tableBody1");
+  var rows = tableBody1.getElementsByTagName("tr");
+
+  for (var i = 0; i < rows.length; i++) {
+    var hoursCell = rows[i].getElementsByTagName("td")[1];
+    
+    if (hoursCell) {
+      var hoursValue = parseFloat(hoursCell.innerText) || 0;
+      totalHours += hoursValue;
+
+      // You can add other logic or actions related to each cell if needed
+    }
+  }
+
+  // Display the total or perform any other action with it
+  displayTotalHours(totalHours);
+
+  return totalHours;
+}
+
+function displayTotalHours(total) {
+  // Update or display the total in a specific element, for example:
+  var totalHoursElement = document.getElementById("totalHours");
+  if (totalHoursElement) {
+    totalHoursElement.innerHTML = "Total Hours: " + total;
+  }
+}
