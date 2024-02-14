@@ -1,0 +1,85 @@
+/* إعادة تعيين بعض الخصائص */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* خصائص الصفحة */
+  body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+  }
+  
+  /* خصائص الحاوية */
+  .container {
+    width: 800px;
+    margin: 20px auto;
+  }
+  
+  /* خصائص عنوان الصفحة */
+  h1 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* خصائص حقل الإدخال */
+  #search-input {
+    width: 500px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  /* خصائص زر البحث */
+  #search-button {
+    background-color: #000;
+    color: #fff;
+    font-size: 16px;
+    width: 100px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* خصائص علامات التبويب */
+  .tabs {
+    margin-bottom: 20px;
+  }
+  
+  .tabs a {
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-right: 10px;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .tabs a.active {
+    background-color: #000;
+    color: #fff;
+  }
+  
+  /* خصائص الجدولين */
+  #results-1, #results-2 {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
+  #results-1 table, #results-2 table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  #results-1 table td, #results-2 table td {
+    border: 1px solid #ddd;
+    padding: 5px;
+  }
+  
