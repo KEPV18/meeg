@@ -1,98 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KEPV for Meeg v 2 </title>
-  <link rel="icon" href="logo.png" type="image/png">
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <header>
-    <h1>KEPV for Meeg V 2 </h1>
-    <h2> By [A.K]</h2>
-    <BR>
-      <h3>welcome</h3>
-    
-  </header>
-  <div id="totalHours"></div>
-  <div class="container">
-    <label for="searchInput">Enter Number For Delay:</label>
-    <input type="text" id="searchInput" />
-    <button onclick="search()">Search</button>
-
-    <!-- Sheet Dropdown -->
-    <label for="sheetDropdown">Select Sheet:</label>
-    <select id="sheetDropdown"></select>
-
-    <!-- Result Container -->
-    <div id="resultContainer"></div>
-
-    <!-- User Number Section -->
-    <div class="user-number-section">
-      <label for="userNumber">Enter Your ME Number :</label>
-      <input type="text" id="userNumber" />
-      <button onclick="searchNumber()">Search</button>
-    </div>
-
-    <!-- Tables Container -->
-    <div class="table-container" id="tablesContainer">
-      <!-- Table 1 -->
-      <table id="resultTable1">
-        <thead>
-          <tr>
-            <th>DATE</th>
-            <th>Hours</th>
-            <th>Value</th>
-          </tr>
-        </thead>
-        <tbody id="tableBody1"></tbody>
-      </table>
-
-      <!-- Table 2 -->
-      <table id="resultTable2">
-        <thead>
-          <tr>
-            <th>DATE</th>
-            <th>Spl</th>
-            <th>Value</th>
-          </tr>
-        </thead>
-        <tbody id="tableBody2"></tbody>
-      </table>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
-  <script>
-    function calculateTotalHours() {
-      var totalHours = 0;
-  
-      var tableBody1 = document.getElementById("tableBody1");
-      var rows = tableBody1.getElementsByTagName("tr");
-  
-      for (var i = 0; i < rows.length; i++) {
-        var hoursCell = rows[i].getElementsByTagName("td")[1];
-  
-        if (hoursCell) {
-          var hoursValue = parseFloat(hoursCell.innerText) || 0;
-          totalHours += hoursValue;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KEPV for Meeg</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Media Query for Desktop */
+        @media (min-width: 768px) {
+            .table-container table {
+                width: 48%;
+            }
         }
-      }
-  
-      displayTotalHours(totalHours);
-  
-      return totalHours;
-    }
-  
-    function displayTotalHours(total) {
-      var totalHoursElement = document.getElementById("totalHours");
-      if (totalHoursElement) {
-        totalHoursElement.innerHTML = "Total Hours: " + total;
-      }
-    }
-  </script>
-  <a href="New Spl calculator.html">New Spl calculator</a>
-  
+
+        /* Media Query for Mobile */
+        @media (max-width: 767px) {
+            .table-container {
+                flex-direction: column;
+            }
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #272727;
+            color: #fff;
+            margin: 20px;
+        }
+
+        header {
+            background-color: #4CAF50;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            color: #fff;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            color: #fff;
+        }
+
+        input,
+        button {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 12px;
+            background-color: #008CBA;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .loader {
+            display: none;
+            margin: 20px auto;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .table-container {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .table-container table {
+            width: 50%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .table-container th,
+        .table-container td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            word-wrap: break-word;
+            max-width: 100%;
+        }
+
+        .table-container th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .table-container td {
+            background-color: #333;
+        }
+
+        /* Media Query for Mobile */
+        @media (max-width: 767px) {
+            .table-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>KEPV for Meeg</h1>
+        <p>By [A.K]</p>
+    </header>
+
+    <div class="container">
+        <label for="searchInput">Enter Number For Delay:</label>
+        <input type="text" id="searchInput" />
+        <button onclick="search()">Search</button>
+
+        <!-- Loading Indicator -->
+        <div id="loadingIndicator" class="loader">Loading...</div>
+
+        <!-- Sheet Dropdown -->
+        <label for="sheetDropdown">Select Sheet:</label>
+        <select id="sheetDropdown"></select>
+
+        <!-- Result Container -->
+        <div id="resultContainer"></div>
+
+        <!-- User Number Section -->
+        <div class="user-number-section">
+            <label for="userNumber">Enter Your ME Number :</label>
+            <input type="text" id="userNumber" />
+            <button onclick="searchNumber()">Search</button>
+        </div>
+
+        <!-- Tables Container -->
+        <div class="table-container" id="tablesContainer">
+            <!-- Table 1 -->
+            <table id="resultTable1">
+                <thead>
+                    <tr>
+                        <th>DATE</th>
+                        <th>Hours</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody1"></tbody>
+            </table>
+
+            <!-- Table 2 -->
+            <table id="resultTable2">
+                <thead>
+                    <tr>
+                        <th>DATE</th>
+                        <th>Spl</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody2"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function search() {
+            var loadingIndicator = document.getElementById("loadingIndicator");
+            loadingIndicator.style.display = "block"; // Show loading indicator
+
+            // Simulate data loading
+            setTimeout(function () {
+                loadingIndicator.style.display = "none"; // Hide loading indicator
+
+                // Your data processing logic here
+
+                // For testing purposes, let's display a simple message
+                var resultContainer = document.getElementById("resultContainer");
+                resultContainer.innerHTML = "Data loaded successfully!";
+            }, 2000); // Simulating a delay of 2 seconds
+        }
+    </script>
 </body>
+
 </html>
