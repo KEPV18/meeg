@@ -1,0 +1,123 @@
+/* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #5a1c1c9f; /* غمق الأزرق */
+  color: #ffffff;
+  margin: 20px;
+}
+
+header {
+  background-color: #5a1c1c9f; /* دمج اللون الأحمر الغامق مع الرمادي */
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  color: #ffffff;
+}
+
+header p {
+  margin: 5px 0 0;
+  color: #ffffff;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+  color: #ffffff;
+}
+
+input,
+button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 12px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+.loader {
+  display: block;
+  margin: 20px auto;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Table Styles */
+.table-container {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.table-container th,
+.table-container td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+  word-wrap: break-word;
+  max-width: 100%;
+}
+
+.table-container th {
+  background-color: #474c57;
+  color: white;
+}
+
+.table-container td {
+  background-color: #3a3f49; /* غمق اللون */
+  color: #ecf0f1;
+}
+
+/* Result Container Styles */
+.result-container {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #ecf0f1;
+  border-radius: 5px;
+  color: #333333;
+}
+
+.no-results {
+  color: #e74c3c;
+}

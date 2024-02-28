@@ -1,387 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KEPV for Meeg</title>
-    <link rel="icon" href="logo.png" type="image/png">
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Media Query for Desktop */
-        @media (min-width: 768px) {
-            .table-container table {
-                width: 48%;
-            }
-        }
-
-        /* Media Query for Mobile */
-        @media (max-width: 767px) {
-            .table-container {
-                flex-direction: column;
-            }
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #272727;
-            color: #fff;
-            margin: 20px;
-        }
-
-        header {
-            background-color: #4CAF50;
-            padding: 20px;
-            text-align: center;
-        }
-
-        header h1 {
-            margin: 0;
-        }
-
-        header p {
-            margin: 5px 0 0;
-            color: #fff;
-        }
-
-        .container {
-            width: 80%;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        label {
-            display: block;
-            margin-top: 10px;
-            color: #fff;
-        }
-
-        input,
-        button {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin-top: 5px;
-            box-sizing: border-box;
-        }
-
-        button {
-            padding: 12px;
-            background-color: #008CBA;
-            color: white;
-            border: none;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        .loader {
-            display: none;
-            margin: 20px auto;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #3498db;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        .table-container {
-            margin-top: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-
-        .table-container table {
-            width: 50%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
-        .table-container th,
-        .table-container td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-            word-wrap: break-word;
-            max-width: 100%;
-        }
-
-        .table-container th {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        .table-container td {
-            background-color: #333;
-        }
-
-        /* Media Query for Mobile */
-        @media (max-width: 767px) {
-            .table-container {
-                flex-direction: column;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>185 for work</title>
+  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <header>
-        <h1>KEPV for Meeg</h1>
-        <p>By [A.K]</p>
-    </header>
+  <header>
+    <h1>185 for work</h1>
+    <p> By [A.K]</p>
+  </header>
+  
+  <div class="container">
+    <label for="searchInput">Enter Number For Delay:</label>
+    <input type="text" id="searchInput" />
+    <button onclick="search()">Search</button>
 
-    <div class="container">
-        <label for="searchInput">Enter Number For Delay:</label>
-        <input type="text" id="searchInput" />
-        <button onclick="search()">Search</button>
+    <!-- Sheet Dropdown -->
+    <label for="sheetDropdown">Select Sheet:</label>
+    <select id="sheetDropdown"></select>
 
-        <!-- Loading Indicator -->
-        <div id="loadingIndicator" class="loader">Loading...</div>
+    <!-- Result Container -->
+    <div id="resultContainer"></div>
 
-        <!-- Sheet Dropdown -->
-        <label for="sheetDropdown">Select Sheet:</label>
-        <select id="sheetDropdown"></select>
-
-        <!-- Result Container -->
-        <div id="resultContainer"></div>
-
-        <!-- User Number Section -->
-        <div class="user-number-section">
-            <label for="userNumber">Enter Your ME Number :</label>
-            <input type="text" id="userNumber" />
-            <button onclick="searchNumber()">Search</button>
-        </div>
-
-        <!-- Tables Container -->
-        <div class="table-container" id="tablesContainer">
-            <!-- Table 1 -->
-            <table id="resultTable1">
-                <thead>
-                    <tr>
-                        <th>DATE</th>
-                        <th>Hours</th>
-                        <th>Value</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBody1"></tbody>
-            </table>
-
-            <!-- Table 2 -->
-            <table id="resultTable2">
-                <thead>
-                    <tr>
-                        <th>DATE</th>
-                        <th>Spl</th>
-                        <th>Value</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBody2"></tbody>
-            </table>
-        </div>
+    <!-- User Number Section -->
+    <div class="user-number-section">
+      <label for="userNumber">Enter Your ME Number :</label>
+      <input type="text" id="userNumber" />
+      <button onclick="searchNumber()">Search</button>
     </div>
 
-    <script src="script.js"></script>
-    <script>
-        // مفتاح ال API الخاص بك
-        const apiKey = "AIzaSyA1DiDSTDT-E1KtlFhUpeecLxnKh_Uxxf8";
-        // رقم الشيت
-        const sheetId = "1uIq-o9hWSlolTnYop9nMNtKRCduGcJ8AjawnQ4JgrRQ";
+    <!-- Tables Container -->
+    <div class="table-container" id="tablesContainer">
+      <!-- Table 1 -->
+      <table id="resultTable1">
+        <thead>
+          <tr>
+            <th>DATE</th>
+            <th>Hours</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody1"></tbody>
+      </table>
 
-        function search() {
-            var loadingIndicator = document.getElementById("loadingIndicator");
-            loadingIndicator.style.display = "block"; // Show loading indicator
+      <!-- Table 2 -->
+      <table id="resultTable2">
+        <thead>
+          <tr>
+            <th>DATE</th>
+            <th>Spl</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody2"></tbody>
+      </table>
+    </div>
+  </div>
 
-            // Simulate data loading
-            setTimeout(function () {
-                loadingIndicator.style.display = "none"; // Hide loading indicator
-
-                // Your data processing logic here
-
-                // For testing purposes, let's display a simple message
-                var resultContainer = document.getElementById("resultContainer");
-                resultContainer.innerHTML = "Data loaded successfully!";
-            }, 2000); // Simulating a delay of 2 seconds
-        }
-
-        async function populateSheetDropdown() {
-            const dropdown = document.getElementById("sheetDropdown");
-
-            try {
-                const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}?key=${apiKey}`);
-                const data = await response.json();
-
-                // تعبئة القائمة المنسدلة بأسماء الأوراق
-                data.sheets.forEach(sheet => {
-                    const option = document.createElement("option");
-                    option.value = sheet.properties.title;
-                    option.textContent = sheet.properties.title;
-                    dropdown.appendChild(option);
-                });
-            } catch (error) {
-                console.error("Error fetching sheet data:", error);
-            }
-        }
-
-        async function searchSheet(searchValue, selectedSheet) {
-            const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${selectedSheet}?key=${apiKey}`;
-
-            try {
-                const response = await fetch(url);
-                const data = await response.json();
-
-                const resultContainer = document.getElementById("resultContainer");
-                resultContainer.innerHTML = ''; // مسح النتائج السابقة
-
-                // بحث في البيانات
-                const results = data.values.filter(row => row.includes(searchValue));
-
-                if (results.length > 0) {
-                    let sum = 0;
-
-                    results.forEach(result => {
-                        result.forEach(value => {
-                            const num = parseFloat(value);
-
-                            if (!isNaN(num) && num <= 8) {
-                                // إذا كانت القيمة هي رقم وأقل من أو تساوي 8
-                                sum += num;
-                            }
-                        });
-                    });
-
-                    // عرض المجموع
-                    resultContainer.innerHTML = `<p>Total Delay: ${sum}</p>`;
-                } else {
-                    resultContainer.innerHTML = '<p>No results found.</p>';
-                }
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
-        }
-
-        // تعبئة القائمة المنسدلة عند تحميل الصفحة
-        window.onload = function () {
-            populateSheetDropdown();
-        }
-
-        const tableBody1 = document.getElementById("tableBody1");
-        const tableBody2 = document.getElementById("tableBody2");
-
-        async function searchNumber() {
-            const userNumber = document.getElementById("userNumber").value;
-            const id = `ME${userNumber}@meti.ai`;
-
-            tableBody1.innerHTML = ''; // Clear Table 1
-            tableBody2.innerHTML = ''; // Clear Table 2
-
-            const sheetsNames1 = await getSheets('1');
-            const sheetsNames2 = await getSheets('2');
-
-            await Promise.all(sheetsNames1.map(async (curSheet) => {
-                const res = await fetch(
-                    `https://sheets.googleapis.com/v4/spreadsheets/15TI7wC8qRSCK2hk32bWTOggEa54p3RYE_9aPQXTilAc/values/${curSheet}?key=AIzaSyA1DiDSTDT-E1KtlFhUpeecLxnKh_Uxxf8`
-                );
-                const data = await res.json();
-                displayTableData(data, tableBody1, curSheet, id);
-            }));
-
-            await Promise.all(sheetsNames2.map(async (curSheet) => {
-                const res = await fetch(
-                    `https://sheets.googleapis.com/v4/spreadsheets/1I3HSt1_WYaVlChTK37VJyYSW07xIA09sq-4lsZyN4og/values/${curSheet}?key=AIzaSyA1DiDSTDT-E1KtlFhUpeecLxnKh_Uxxf8`
-                );
-                const data = await res.json();
-                displayTableData(data, tableBody2, curSheet, id);
-            }));
-        }
-
-        async function getSheets(page) {
-            const res = await fetch(
-                `https://sheets.googleapis.com/v4/spreadsheets/${getSpreadsheetKey(page)}/?key=AIzaSyA1DiDSTDT-E1KtlFhUpeecLxnKh_Uxxf8`
-            );
-            const data = await res.json();
-            const sheetsNames = data.sheets.map((sheet) => ({
-                title: encodeURIComponent(sheet.properties.title),
-                index: parseInt(sheet.properties.title.split("/").pop()) || 0
-            }));
-
-            sheetsNames.sort((a, b) => {
-                const dateA = extractDateFromSheetName(a.title);
-                const dateB = extractDateFromSheetName(b.title);
-                return dateA - dateB;
-            });
-
-            return sheetsNames.map(sheet => sheet.title);
-        }
-
-        function extractDateFromSheetName(sheetName) {
-            const match = sheetName.match(/(\d{1,2})\/(\d{1,2})/);
-            if (match) {
-                const month = parseInt(match[1]);
-                const day = parseInt(match[2]);
-                return new Date(new Date().getFullYear(), month - 1, day);
-            }
-            return null;
-        }
-
-        function getSpreadsheetKey(page) {
-            return (page === '1') ? '15TI7wC8qRSCK2hk32bWTOggEa54p3RYE_9aPQXTilAc' : '1I3HSt1_WYaVlChTK37VJyYSW07xIA09sq-4lsZyN4og';
-        }
-
-        function getSheetNumber(sheetName) {
-            const match = sheetName.match(/(\d{1,2})\/(\d{1,2})/);
-            if (match) {
-                return match[2] + '/' + match[1];
-            }
-            return null;
-        }
-
-        function displayTableData(data, tableBody, curSheet, id) {
-            const myIdRow = data.values.find((row) => row.includes(id));
-
-            if (myIdRow) {
-                const sheetName = curSheet.replace(/%2(\d|[A-Z])/g, "/");
-                const sheetNameParts = sheetName.match(/(\d{1,2}\/\d{1,2})$/);
-                const simplifiedSheetName = sheetNameParts ? sheetNameParts[1] : sheetName;
-
-                myIdRow.slice(7).forEach((item, i) => {
-                    if (item !== undefined && item !== null && item !== "" && item !== "undefined(FP)" && item !== "0") {
-                        const row = document.createElement("tr");
-
-                        const sheetNameCell = document.createElement("td");
-                        sheetNameCell.textContent = simplifiedSheetName;
-                        row.appendChild(sheetNameCell);
-
-                        const nameCell = document.createElement("td");
-                        nameCell.textContent = (data.values[0][i + 7] !== "" && data.values[0][i + 7] + "(FP)") ||
-                            (data.values[0][i + 6] !== "" && "NO. labels FP") ||
-                            (data.values[0][i + 5] !== "" && data.values[0][i + 5] + "(QA)") ||
-                            (data.values[0][i + 4] !== "" && "NO. labels QA");
-                        row.appendChild(nameCell);
-
-                        const valueCell = document.createElement("td");
-                        valueCell.textContent = item;
-                        row.appendChild(valueCell);
-
-                        tableBody.appendChild(row);
-                    }
-                });
-            }
-        }
-    </script>
+  <script src="script.js"></script>
 </body>
-
 </html>
