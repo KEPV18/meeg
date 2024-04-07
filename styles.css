@@ -1,13 +1,13 @@
 /* General Styles */
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #1e272e; /* تغيير الخلفية إلى اللون الأسود */
+  background-color: #5a1c1c9f; /* غمق الأزرق */
   color: #ffffff;
   margin: 20px;
 }
 
 header {
-  background-color: #273c75; /* تغيير لون العنوان إلى اللون الأزرق */
+  background-color: #5a1c1c9f; /* دمج اللون الأحمر الغامق مع الرمادي */
   padding: 20px;
   text-align: center;
 }
@@ -40,12 +40,11 @@ button {
   padding: 10px;
   margin-top: 5px;
   box-sizing: border-box;
-  background-color: #192a56; /* تغيير لون الحقل إلى اللون الأزرق الداكن */
 }
 
 button {
   padding: 12px;
-  background-color: #0c2461; /* تغيير لون الزر إلى اللون الأزرق الداكن */
+  background-color: #3498db;
   color: white;
   border: none;
   cursor: pointer;
@@ -53,14 +52,14 @@ button {
 }
 
 button:hover {
-  background-color: #082c6c; /* تغيير لون الزر عند التحويم */
+  background-color: #2980b9;
 }
 
 .loader {
   display: block;
   margin: 20px auto;
   border: 4px solid #f3f3f3;
-  border-top: 4px solid #0c2461; /* تغيير لون الحركة للأزرق الداكن */
+  border-top: 4px solid #3498db;
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -101,12 +100,12 @@ button:hover {
 }
 
 .table-container th {
-  background-color: #273c75; /* تغيير لون العنوان في الجدول */
+  background-color: #474c57;
   color: white;
 }
 
 .table-container td {
-  background-color: #192a56; /* تغيير لون خلفية البيانات في الجدول */
+  background-color: #3a3f49; /* غمق اللون */
   color: #ecf0f1;
 }
 
@@ -114,9 +113,9 @@ button:hover {
 .result-container {
   margin-top: 20px;
   padding: 10px;
-  background-color: #273c75; /* تغيير لون خلفية النتائج */
+  background-color: #ecf0f1;
   border-radius: 5px;
-  color: #ffffff;
+  color: #333333;
 }
 
 .no-results {
