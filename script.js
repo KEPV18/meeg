@@ -137,7 +137,7 @@ function extractDateFromSheetName(sheetName) {
 }
 
 function getSpreadsheetKey(page) {
-  return (page === '1') ? '1idy2I6-yhacTR_EeVWZg0yR8QdSZB6Zh_wa20cVZfxM' : '1jN-nbNJxWyFadRCEOMV7GnP9WX1lN2nOmh8CliQgn_Q';
+  return (page === '1') ? '1BoiSAc9OnuyFw5JGWPTmIj2CKaAI3miiB5Nm-qmdl0M' : '13WWnUUVma3OB38OFS2BiRGsAk500rqgMXWiHMhNFCmo';
 }
 
 function getSheetNumber(sheetName) {
