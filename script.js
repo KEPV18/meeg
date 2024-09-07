@@ -4,7 +4,7 @@ const apiKey = "AIzaSyA1DiDSTDT-E1KtlFhUpeecLxnKh_Uxxf8";
 const sheetId = "1uIq-o9hWSlolTnYop9nMNtKRCduGcJ8AjawnQ4JgrRQ";
 
 function search() {
-  const searchValue = document.getElementById("searchInput").value;
+  const searchValue = document.querySelector(".search-input").value; // تعديل هنا
   const selectedSheet = document.getElementById("sheetDropdown").value;
 
   // إضافة "ME" إلى القيمة المدخلة
@@ -62,8 +62,10 @@ async function searchSheet(searchValue, selectedSheet) {
 
       // عرض المجموع
       resultContainer.innerHTML = `<p>Total Delay: ${sum}</p>`;
+      updateUI(); // تحديث واجهة المستخدم
     } else {
       resultContainer.innerHTML = '<p>No results found.</p>';
+      updateUI(); // تحديث واجهة المستخدم
     }
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -75,7 +77,17 @@ window.onload = function() {
   populateSheetDropdown();
 }
 
+// إضافة وظيفة لتحسين التكامل بين الأجزاء
+function updateUI() {
+  const resultContainer = document.getElementById("resultContainer");
+  const noDataMessage = document.getElementById("noDataMessage");
 
+  if (resultContainer.innerHTML.trim() === '') {
+    noDataMessage.style.display = 'block'; // عرض رسالة عدم وجود بيانات
+  } else {
+    noDataMessage.style.display = 'none'; // إخفاء الرسالة
+  }
+}
 
 const tableBody1 = document.getElementById("tableBody1");
 const tableBody2 = document.getElementById("tableBody2");
